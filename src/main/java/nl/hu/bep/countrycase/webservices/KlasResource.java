@@ -5,7 +5,9 @@ import nl.hu.bep.countrycase.model.Student;
 
 import javax.json.*;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.io.StringReader;
+import java.util.List;
 
 @Path("/klas")
 public class KlasResource {
@@ -13,29 +15,17 @@ public class KlasResource {
     private Klas klas = Klas.getKlas();
 
     @GET
-    public String getAlleStudenten(){
-        Klas klas = this.klas;
-        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-
-        for(Student s: klas.getStudenten()){
-            arrayBuilder.add(s.toJson());
-        }
-        return arrayBuilder.build().toString();
+    @Produces("application/json")
+    public List<Student> getAlleStudenten(){
+        return this.klas.getStudenten();
     }
 
     @POST
-    public String nieuweStudent(String jsonNieuweStudent){
-
-        StringReader inKleineStukjes = new StringReader(jsonNieuweStudent);
-        JsonReader reader = Json.createReader(inKleineStukjes);
-        JsonObject readObject = reader.readObject();
-
-        String naam = readObject.getString("naam");
-
-        Student nieuweStudent = new Student(naam);
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Student nieuweStudent(Student nieuweStudent){
         this.klas.voegStudentToe(nieuweStudent);
-
-        return nieuweStudent.toJson().toString();
+        return nieuweStudent;
     }
 
 

@@ -11,8 +11,12 @@ public class Student implements Serializable {
     private String naam;
     private long id;
 
-    public Student(String naam) {
-        this.naam = naam;
+    public Student(){
+        System.out.println("Ik wordt aangeroepen vanuit Jackson");
+    }
+
+    public Student(String zxc) {
+        this.naam = zxc;
         this.id = sharedId;
         sharedId++;
     }
