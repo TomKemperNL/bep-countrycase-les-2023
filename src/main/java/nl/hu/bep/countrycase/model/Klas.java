@@ -61,6 +61,11 @@ public class Klas implements Serializable {
         return null;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
     public void verwijderStudent(Student gevondenStudent) {
         this.studenten.remove(gevondenStudent);
     }
