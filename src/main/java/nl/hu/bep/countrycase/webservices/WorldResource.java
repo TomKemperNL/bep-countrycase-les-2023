@@ -4,13 +4,13 @@ package nl.hu.bep.countrycase.webservices;
 import nl.hu.bep.countrycase.model.Country;
 import nl.hu.bep.countrycase.model.World;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("countries")
 public class WorldResource {
-
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -29,6 +29,7 @@ public class WorldResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin")
     public Country newCountry(CountryPostRequest req){
         Country c = new Country(
                 req.getCode(),
