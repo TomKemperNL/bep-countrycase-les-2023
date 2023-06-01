@@ -18,7 +18,15 @@ public class CountrySecurityContext implements SecurityContext {
 
     @Override
     public boolean isUserInRole(String role) {
-        return true;
+        if(this.principal == null){
+            return false;
+        }
+
+        if(role.equals("admin") && this.principal.getName().equals("Bob")){
+            return true;
+        }
+
+        return false;
     }
 
     @Override

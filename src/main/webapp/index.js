@@ -29,6 +29,8 @@ function opdeknopdrukken() {
 }
 
 function nieuwCountry(naam, codeVeld, iso3Veld) {
+    let thisisBob = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJCb2IifQ.Llh46W2DSIvq8IC1po7GxxjaW5IEpp1CQgCjjE4zJfx6CXxW830-f4SgR8c2ZT-WVhxubdx8op0BgvuHhF2EnQ"
+
     fetch('http://localhost:8080/restservices/countries',
         {
             method: 'POST',
@@ -38,7 +40,8 @@ function nieuwCountry(naam, codeVeld, iso3Veld) {
                 iso3: iso3Veld
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + thisisBob
             }
         }).then(refresh);
 
