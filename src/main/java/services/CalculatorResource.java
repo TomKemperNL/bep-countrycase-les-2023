@@ -15,11 +15,24 @@ public class CalculatorResource {
     @Path("/telop")
     @Produces("application/json")
     @Consumes("application/json")
-    public Response telOp(TelopRequest input){
-        int getal1 = input.getGetal1();
-        int getal2 = input.getGetal2();
-        int resultaat = getal1 + getal2;
-        return Response.ok(new TelopResponse(resultaat)).build();
+    public Response telOp(TelopRequest input) {
+        return Response.ok(new TelopResponse(input.getal1 + input.getal2)).build();
     }
+
+    public static class TelopRequest {
+        public int getal1;
+        public int getal2;
+    }
+
+    public static class TelopResponse {
+        public int resultaat;
+
+        public TelopResponse(int resultaat) {
+            this.resultaat = resultaat;
+        }
+
+    }
+
+
 }
 
